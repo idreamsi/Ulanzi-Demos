@@ -69,9 +69,9 @@ void setup() {
   // Click the "i" in a circle to see the numbers for the graphic
   // You can design your own graphics here and then copy the numbers into our program:
   // https://pixelit-project.github.io/pixelit/webui/#/creator
-  uint16_t icon1[64] {0,0,63650,63650,63650,63650,0,0,     // Pixelfarben fuer die 1. Zeile
-                      0,0,63650,63650,63650,63488,63488,0, // 2. Zeile
-                      0,0,65139,25388,65139,25388,0,0,     // 3. Zeile usw.
+  uint16_t icon1[64] {0,0,63650,63650,63650,63650,0,0,     // Pixel colors for the 1st line
+                      0,0,63650,63650,63650,63488,63488,0, // 2. line
+                      0,0,65139,25388,65139,25388,0,0,     // 3. Lines etc.
                       0,0,65139,65139,39296,39296,0,0,
                       65139,63488,12918,63488,63488,12918,63488,65139,
                       0,0,12918,12918,12918,12918,0,0,

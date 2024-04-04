@@ -102,7 +102,7 @@ void setup() {
 // Calculate how many pixels of the transferred text is wide.
 // The function is not entirely, it seems as if always a couple
 // pixel more to be returned than the text is wide. But doesn't do anything.
-uint16_t textBreite(char* text)
+uint16_t textWidth(char* text)
 {
   // The function "Getteextbounds ()" expects a few variables that you will fill
   // (Therefore, the addresses of the variables are transferred, otherwise
@@ -115,35 +115,36 @@ uint16_t textBreite(char* text)
 //-----------------------------------------------------------------------------------------
 
 void loop() {
-  // Startposition fuer den Text: am rechten Rand der Anzeige.
-  // "static" bedeutet, dass die Variable nur beim ersten mal den Wert MATRIX_BREITE bekommt,
-  // danach hat diese Zeile keine Funktion mehr.
-  static int x = MATRIX_BREITE;
+  // starting position for the text: on the right edge of the display.
+  // "Static" means that the variable only gets the value matrix_wreite the first time,
+  // After that, this line has no function.
+  static int x = MATRIX_WIDTH;
 
-  // Breite des Texts in Pixeln:
-  static int text_breite_in_pixel = textBreite(text);
+  // Width of the text in pixels:
+  static int text_width_in_pixel = textWidth(text);
 
-  // Alten Text loeschen
+  // Clear Screen
   matrix->clear();
-  // Aktuelle Position setzen, sie wird bei jedem Durchlauf von loop() um eins verringert.
-  // Dadurch wird der Text immer weiter links angezeigt
+  
+  // Set the current position, it is reduced by one with every run of Loop ().
+  // This shows the text further and further on the left
   matrix->setCursor(x, 7);
 
-  // Text ausgeben und anzeigen:
+  // output text and display:
   matrix->print(text);
   matrix->show();
 
-  // Naechste Runde soll der Text einen Pixel weiter links ausgegeben werden. Dadurch kommt der
-  // Laufschrift-Effekt zustande
+  // The next round the text should be given a pixel further on the left. This comes the
+  // head script effect
   x--;
 
-  // Wenn der Text ganz durchgelaufen ist, starte wieder ganz rechts (wie am Anfang):
-  if (x < -text_breite_in_pixel)
+  // When the text has run through completely, start right again (as at the beginning):
+  if (x < -text_width_in_pixel)
   {
-    x = MATRIX_BREITE;
+    x = MATRIX_WIDTH;
   }
 
-  // Kurze Pause (100 ms), damit der Text nicht zu schnell durchrauscht:
+  // short break (100 ms) so that the text does not rush too quickly:
   delay(100);
   
 }

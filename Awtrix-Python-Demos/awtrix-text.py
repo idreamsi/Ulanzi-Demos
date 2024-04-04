@@ -1,52 +1,52 @@
 #!/usr/bin/env python3
 
-# Programm zum Anzeigen von Text auf der AWTRIX-LED-Matrix
-# Wenn der Text laenger ist als die Matrix breit ist, dann wird er
-# automatisch als Laufschrift angezeigt.
-# Nach einer Weile verschwindet der Text wieder und die Uhrzeit wird
-# wieder angezeigt.
+# Program for displaying text on the awtrix LED matrix
+# If the text is Laenger than the matrix is wide, then it becomes
+# automatically displayed as a head.
+# After a while the text disappears and the time becomes
+# again displayed.
 #
-# Beispiel: Anzeigen von "Hallo" in gelb (die Standardfarbe):
-#           ./awtrix-text.py Hallo
-# Beispiel: Anzeigen von "Heute ist ein schoener Tag" in hellblau.
-#           Weil der Text aus mehreren Woertern besteht, muss er in
-#           Anfuehrungszeichen gesetzt werden:
-#           ./awtrix-text.py "Heute ist ein schoener Tag" 00ffff
+# Example: Show "Hello" in yellow (the standard color):
+#         ./awtrix-text.py Hello
+# Example: Show "Today is a Schoener Tag" in light blue.
+# Because the text consists of several Woertern, it must be in
+# Desorting signs are set:
+#         ./awtrix-text.py "Today is a beautiful day" 00ffff
 #
-# Siehe https://blueforcer.github.io/awtrix-light/#/api?id=custom-apps-and-notifications
+# See https://blueforcer.github.io/awtrix-light/#/api?id=cUtom-apps-and-notifications
 
 import requests
 import json
 import argparse
 
-# IP-Adresse der Ulanzi TC-001 bzw. der AWTRIX-LED-Matrix
+# IP address of the Ulanzi TC-001 or the AWTrix LED matrix
 adresse = "10.0.0.73"
 
-# Kommandozeilenargumente einlesen
+# Read command line arguments
 parser = argparse.ArgumentParser(description='AWTRIX Fernsteuerung: Text und Laufschrift')
 
-# Welche Parameter sind moeglich?
+# Which parameters are possible?
 parser.add_argument('text', type=str, help='Der anzuzeigende Text')
-# Wenn nichts angegeben wird, wird die Farbe d2d200 (gelb) verwendet
+# If nothing is specified, the color D2D200 (yellow) is used
 parser.add_argument('farbe', type=str, default="d2d200", nargs='?',
                      help='Die Farbe als RGB Hexadezimalwert oder "aus". Wenn nichts angegeben wird, wird die Farbe d2d200 (gelb) verwendet')
 
 args = parser.parse_args()
 
-# Falls die Farbe "aus" ist, dann wird das durch die Farbe Schwarz (000000) erreicht
+# If the color is "off", this is achieved by the color black (000000)
 if args.farbe == "aus":
     args.farbe = "000000"
 
-# Jetzt haben wir alle Daten fuer den HTTP-Request
+# Now we have all the data for the http request
 url = f"http://{adresse}/api/notify"
 data = {"text": f"{args.text}", "color": f"#{args.farbe}"}
-# Dieser Header ist noetig, weil wir JSON-Daten senden
+# This header is set up because we send JSON data
 headers = {'Content-Type': 'application/json'}
 
-# Und: Abschicken!
+# And: Submit!
 response = requests.post(url, data=json.dumps(data), headers=headers)
 
-# Jetzt die Antwort ausgeben
+# Now output the answer
 print(response.status_code)
 print(response.text)
 

@@ -1,5 +1,5 @@
-# Demos und Beispielprogramme fuer die Ulanzi TC-001 LED-Anzeige
+# Demos and sample programs for the Ulanzi TC-001 LED display
 
-Hier gibt es:
-* Arduino-Programme, mit denen die Ulanzi LED-Anzeige direkt programmiert wird. Es wird Text angezeigt, Laufschrift, Grafik und Animationen. Diese sind in den Verzeichnissen, die mit "Ulanzi-Demo" anfangen.
-* Python-Skripte, mit denen die Awtrix-Firmware fuer die Ulanzi TC-001 ferngesteuert wird. Diese sind im Verzeichnis "Awtrix-Python-Demos".
+Here there are:
+* Arduino programs that program the Ulanzi LED display directly. Text, scrolling text, graphics and animations are displayed. These are in the directories that start with "Ulanzi-Demo".
+* Python scripts used to remotely control the Awtrix firmware for the Ulanzi TC-001. These are in the “Awtrix-Python-Demos” directory.

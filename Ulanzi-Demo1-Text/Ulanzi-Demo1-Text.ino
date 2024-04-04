@@ -1,11 +1,10 @@
-// Demo-Programm, das einen Text und eine Linie auf der Ulanzi TC-001 anzeigt
+// Demo program that displays a text and a line on the Ulanzi TC-001.
 
-// Board Manager:  "ESP32" (von "Expressif Systems") hinzufuegen
+// Board Manager:  "ESP32" (from "Expressif Systems")
 //
-// Library Manager: "FastLED NeoMatrix" (von Marc Merlin) hinzufuegen und alles,
-//                  was dann vorgeschlagen wird
+// Library Manager: "FastLED NeoMatrix" (from Marc Merlin)
 //
-// Einstellungen:
+// Settings:
 // Board: ESP32 Dev Module
 // Upload Speed: 230400
 // CPU Frequency: 240 MHz (WiFi/BT)
@@ -15,49 +14,48 @@
 // Partition Scheme: Default 4 MB with spiffs (1.2 MB APP/1.5 MB SPIFFS)
 // Core Debug Level: None
 // PSRAM: Disabled
-// Port: bei mir /dev/cu.usbserial-2210, kann bei Dir aber anders sein
-// Wenn das Flashen fehlschlaegt, einfach oefters probieren. Wenn es gar nicht geht,
-// hilft manchmal, die Anzeige aus- und wieder einzuschalten.
+// Port: for me /dev/cu.usbserial-2210, but it may be different for you
+// If flashing fails, just try more often. If it doesn't work at all,
+// Sometimes it helps to turn the display off and on again.
 
 #include <Arduino.h>
 
-// Funktions-Bibliotheken fuer die LED-Anzeige.
-// Die eigentlichen Funktionen, die man selbst aufruft, sind aber in
-// Adafruit_GFX, das von den beiden Bibliotheken eingebunden wird.
+// Function libraries for the LED display.
+// The actual functions that you call yourself are in
+// Adafruit_GFX, which is included by the two libraries.
 // Anleitung dazu: https://learn.adafruit.com/adafruit-gfx-graphics-library
-// Alle Funktionen in der Uebersicht:
+// All functions at a glance:
 // https://github.com/adafruit/Adafruit-GFX-Library/blob/master/Adafruit_GFX.h
 #include <FastLED_NeoMatrix.h>
 #include <FastLED.h>
 
-// An welchen Pin die LEDs angeschlossen sind:
+// Which pin the LEDs are connected to:
 #define MATRIX_PIN 32
 
-// An Pin 15 ist ein Piepser, der zu leise ist und auch sonst nicht sehr
-// nuetzlich ist.
+// There is a beeper on pin 15 that is too quiet and is otherwise not very useful.
 #define PIEPSER_PIN 15
 
-// Anzahl der LEDs in der Breite und Hoehe:
+// Number of LEDs in width and height:
 #define MATRIX_BREITE 32
 #define MATRIX_HOEHE 8
 
-// Die LED-Matrix als Objekt:
+// The LED matrix as an object:
 CRGB leds[MATRIX_BREITE * MATRIX_HOEHE];
 FastLED_NeoMatrix *matrix;
 
 
 void setup() {
-  // Piepser stumm schalten
+  // Mute beeper
   pinMode(PIEPSER_PIN, OUTPUT);
   digitalWrite(15, LOW);
   
-  // LED Matrix initialisieren:
+  // Initialize LED matrix:
   FastLED.addLeds<NEOPIXEL, MATRIX_PIN>(leds, MATRIX_BREITE * MATRIX_HOEHE);
   matrix = new FastLED_NeoMatrix(leds, MATRIX_BREITE, MATRIX_HOEHE,
      NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_ROWS + NEO_MATRIX_ZIGZAG);
   matrix->begin();
 
-  // Helligkeit geht von 0-255, wir nehmen einen mittleren Wert:
+  // Brightness goes from 0-255, we take a medium value:
   matrix->setBrightness(155);
 
   // Text-Farbe einstellen: Orange!

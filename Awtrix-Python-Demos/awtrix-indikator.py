@@ -4,7 +4,7 @@
 # Example: Setting the upper indicator (number 1) on red:
 # ./awtrix-indicator.py 1 ff0000
 # Example: Switching off the upper indicator:
-# ./awtrix-indicator.py 1 off
+# ./awtrix-indikator.py 1 aus
 # See https://blueforcer.github.io/awtrix-light/#/api?id=colored-indicators
 
 import requests
